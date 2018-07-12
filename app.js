@@ -46,16 +46,17 @@ class App extends Component {
       <div>
         <button onClick={this.onClick}>Add item</button>
         <ul>
-          {
-            todos.map((todo) => {
+          {render() {
 
-              // 傳回 jsx
-              return (
-                <li>
-                  name:{todo.name}, {todo.completed ? '已完成' : ''}
-                </li>
-              );
-            })
+    // 從 state 取出資料
+    let todos = this.state.todos;
+
+    return (
+      <div>
+        <button onClick={this.onClick}>Add item</button>
+        <ul>
+          {
+            todos.map((todo) => (<Todo name={todo.name} completed={todo.completed} />))
           }
         </ul>
       </div>
@@ -64,3 +65,18 @@ class App extends Component {
 }
 
 export default App;
+/*  Todo.js */
+import React, { Component } from 'react';
+
+export default class Todo extends Component {
+
+  render() {
+    const {name, completed} = this.props;
+    return (
+      <li>
+        name:{name}, {completed ? '已完成~' : ''}
+      </li>
+    );
+  }
+}
+
