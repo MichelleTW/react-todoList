@@ -7,6 +7,10 @@ class App extends Component {
   constructor (props) {
     super(props);
 
+    // 這一行有點難解釋，想深入研究的麻煩自己查資料
+    // 
+    this.onClick = this.onClick.bind(this);
+
     // 設定 state
     this.state = {
       todos: [
@@ -16,6 +20,23 @@ class App extends Component {
       ]
     }
   }
+
+  onClick() {
+
+    // 亂數隨機產生一個 id
+    var newId = Math.floor(Math.random()*500);
+
+    // 設定 state
+    this.setState({
+
+      // ES6 語法，就等於是把 todos 新增一個 item
+      todos: [
+        ...this.state.todos,
+        {id: newId, name: '我是' + newId, completed: false}
+      ]
+    })
+  }
+
   render() {
 
     // 從 state 取出資料
@@ -23,6 +44,7 @@ class App extends Component {
 
     return (
       <div>
+        <button onClick={this.onClick}>Add item</button>
         <ul>
           {
             todos.map((todo) => {
